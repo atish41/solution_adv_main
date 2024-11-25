@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for visaroadmap-pipeline-pratik1-1001 on 2024-11-22T06:22:00Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'visaroadmap-pipeline-pratik1-1001'
+primary_region = 'sjc'
+
+[build]
+
+[env]
+  FLY_APP_NAME = 'visaroadmap-pipeline-pratik1-1001'
+
+[http_service]
+  internal_port = 7860
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
