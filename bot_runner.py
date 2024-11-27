@@ -57,6 +57,7 @@ class BotConfig(BaseModel):
     #prompt: str = Field("You are a friendly customer service agent...", description="System prompt for the bot")
     voice_id: str = Field("CwhRBWXzGAHq8TQ4Fs17", description="Voice ID for TTS")
     session_time: Optional[float] = Field(3600, description="Session expiry time in seconds")
+    emails: list[str]
 
 
 
