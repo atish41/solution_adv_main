@@ -1,0 +1,19 @@
+[
+  {
+    "role": "assistant",
+    "content": "Hello!  I'm here to walk you through your visa roadmap.  May I proceed with the explanation?",
+    "name": "assistant"
+  },
+  {
+    "role": "assistant",
+    "content": "Great!  Let's get started.  \n\nThe first part of your visa roadmap is about **Eligibility Requirements**.  This section outlines the basic criteria you must meet to apply for the specific visa you're interested in.  It includes things like age requirements, necessary qualifications or skills, and possibly a health and character assessment.  \n\nDo you have any questions about this section, or are you ready to continue to the next part?"
+  },
+  {
+    "role": "user",
+    "content": "Yes. Please continue for next call."
+  },
+  {
+    "role": "assistant",
+    "content": "Alright, moving on to the **Application Process** section.  \n\nThis part of the roadmap details the steps involved in completing your visa application.  It usually starts with gathering all required documents, such as your passport, proof of eligibility, and any other supporting materials.  Then, it will guide you through filling out the application form and submitting it, either online or via mail.  Finally, it will mention any fees you need to pay and how to schedule any required interviews or biometric appointments. \n\nAre you following along okay, or do you have any questions about this part of the process?"
+  }
+]

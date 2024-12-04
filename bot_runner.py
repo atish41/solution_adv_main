@@ -58,6 +58,7 @@ class BotConfig(BaseModel):
     voice_id: str = Field("CwhRBWXzGAHq8TQ4Fs17", description="Voice ID for TTS")
     session_time: Optional[float] = Field(3600, description="Session expiry time in seconds")
     emails: list[str]
+    expire_mintues:Optional[int]=10
 
 
 
@@ -153,9 +154,10 @@ async def start_bot(config: BotConfig) -> JSONResponse:
 
     # Use specified room URL, or create a new one if not specified
     room_url = os.getenv("DAILY_SAMPLE_ROOM_URL", "")
+    expire_minutes=config.expire_mintues or 10
 
     if not room_url:
-        params = DailyRoomParams(properties=DailyRoomProperties(exp=time.time() + 10 * 60))
+        params = DailyRoomParams(properties=DailyRoomProperties(exp=time.time() + expire_minutes* 60))
         try:
             room: DailyRoomObject = await daily_helpers["rest"].create_room(params=params)
         except Exception as e:

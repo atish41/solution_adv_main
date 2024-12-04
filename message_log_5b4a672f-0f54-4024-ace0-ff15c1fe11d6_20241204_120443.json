@@ -1,0 +1,22 @@
+[
+  {
+    "role": "assistant",
+    "content": "Hello!  It's great to meet you.  Are you ready to go through your visa roadmap?"
+  },
+  {
+    "role": "user",
+    "content": "Yes. You can continue."
+  },
+  {
+    "role": "assistant",
+    "content": "Great!  Let's start with the first section of your roadmap, which is **Eligibility Check**.  \n\n In this initial step, we will evaluate if you qualify for the type of visa you are interested in.  This involves checking if you meet the necessary criteria related to things like your nationality, your purpose foo r traveling, whether you have a job offer (if needed), and your financial status.  \n\n Let me know if this makes sense or if you have any questions before we move on to the next section."
+  },
+  {
+    "role": "user",
+    "content": "No. Thank you. That's all from my side. You can view the meeting."
+  },
+  {
+    "role": "assistant",
+    "content": "Alright!  If anything else comes up or if you have more questions in the future, feel free to reach out.  Have a great day!"
+  }
+]

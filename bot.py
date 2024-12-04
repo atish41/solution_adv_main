@@ -9,6 +9,7 @@ import datetime
 from typing import Dict
 
 from make_scenario import send_to_webhook
+from pipecat.services.azure import AzureLLMService, AzureSTTService, AzureTTSService, Language
 
 from pipecat.audio.vad.silero import SileroVADAnalyzer
 from pipecat.pipeline.pipeline import Pipeline
@@ -102,12 +103,24 @@ async def main(room_url: str, token: str , config_b64):
             speed=config["speed"],
             emotion=config["emotion"]
         )
-    tts = ElevenLabsTTSService(api_key=os.getenv("ELEVEN_LABS_API_KEY"), voice_id=os.getenv("ELEVEN_LABS_VOICE_ID"))
+    # tts = ElevenLabsTTSService(api_key=os.getenv("ELEVENLABS_API_KEY"), voice_id=os.getenv("ELEVENLABS_VOICE_ID"))
     # tts = CartesiaTTSService(
     #         api_key=os.getenv("CARTESIA_API_KEY"),
     #         voice_id=config['voice_id'],
     #         params=tts_params
       #  )
+
+    tts_service = AzureTTSService(
+        api_key=os.getenv("AZURE_API_KEY"),
+        region=os.getenv("AZURE_REGION"),
+        voice="en-NG-EzinneNeural",
+        params=AzureTTSService.InputParams(
+            language=Language.EN_US,
+            rate="1.1",
+            style="cheerful"
+        )
+    )
+
 
     llm = OpenAILLMService(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4o")
     full_prompt=prompt+config['roadmap']
@@ -126,7 +139,7 @@ async def main(room_url: str, token: str , config_b64):
             transport.input(),
             context_aggregator.user(),
             llm,
-            tts,
+            tts_service,
             transport.output(),
             context_aggregator.assistant(),
         ]
@@ -160,8 +173,13 @@ async def main(room_url: str, token: str , config_b64):
             logger.info(f"Final transcription confidence: {message.get('rawResponse', {}).get('confidence', 0.0)}")
 
 
-    @transport.event_handler("on_first_participant_joined")
-    async def on_first_participant_joined(transport, participant):
+    # @transport.event_handler("on_first_participant_joined")
+    # async def on_first_participant_joined(transport, participant):
+    #     await transport.capture_participant_transcription(participant["id"])
+    #     await task.queue_frames([LLMMessagesFrame(messages)])
+
+    @transport.event_handler("on_participant_joined")
+    async def on_participant_joined(transport, participant):
         await transport.capture_participant_transcription(participant["id"])
         await task.queue_frames([LLMMessagesFrame(messages)])
 
